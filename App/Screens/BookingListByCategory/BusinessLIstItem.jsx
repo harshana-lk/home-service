@@ -1,9 +1,11 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-
 import { MaterialIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 export default function BusinessLIstItem({ business }) {
+  const navigation = useNavigation();
+
   return (
     <View>
       <View style={styles.container}>
@@ -46,12 +48,14 @@ export default function BusinessLIstItem({ business }) {
             </Text>
           </View>
         </View>
-        <MaterialIcons
-          name="bookmark-border"
-          size={34}
-          color="black"
+        <TouchableOpacity
+          onPress={() => {
+            navigation.push("business-details", { business: business });
+          }}
           style={{ marginLeft: "auto" }}
-        />
+        >
+          <MaterialIcons name="add-circle-outline" size={34} color="black" />
+        </TouchableOpacity>
       </View>
     </View>
   );
