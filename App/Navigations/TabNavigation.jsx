@@ -5,8 +5,8 @@ import HomeScreen from "../Screens/HomeScreen/HomeScreen";
 import BookingScreen from "../Screens/BookingScreen/BookingScreen";
 import ProfileScreen from "../Screens/ProfileScreen/ProfileScreen";
 import { FontAwesome } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
 import Colors from "../Utils/Colors";
+import HomeNavigation from "./HomeNavigation";
 
 const Tab = createBottomTabNavigator();
 const TabNavigation = () => {
@@ -19,10 +19,17 @@ const TabNavigation = () => {
     >
       <Tab.Screen
         name="home"
-        component={HomeScreen}
+        component={HomeNavigation}
         options={{
           tabBarLabel: ({ color }) => (
-            <Text style={{ color: color, fontSize: 12, marginTop: -7 }}>
+            <Text
+              style={{
+                color: color,
+                fontSize: 12,
+                marginTop: -7,
+                fontFamily: "outfit",
+              }}
+            >
               Home
             </Text>
           ),
@@ -36,7 +43,14 @@ const TabNavigation = () => {
         component={BookingScreen}
         options={{
           tabBarLabel: ({ color }) => (
-            <Text style={{ color: color, fontSize: 12, marginTop: -7 }}>
+            <Text
+              style={{
+                color: color,
+                fontSize: 12,
+                marginTop: -7,
+                fontFamily: "outfit",
+              }}
+            >
               Book
             </Text>
           ),
@@ -50,7 +64,14 @@ const TabNavigation = () => {
         component={ProfileScreen}
         options={{
           tabBarLabel: ({ color }) => (
-            <Text style={{ color: color, fontSize: 12, marginTop: -7 }}>
+            <Text
+              style={{
+                color: color,
+                fontSize: 12,
+                marginTop: -7,
+                fontFamily: "outfit",
+              }}
+            >
               Profile
             </Text>
           ),

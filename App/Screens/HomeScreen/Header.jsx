@@ -13,8 +13,14 @@ export default function Header() {
           <View style={styles.profileContainer}>
             <Image source={{ uri: user?.imageUrl }} style={styles.userImage} />
             <View>
-              <Text>Welocme,</Text>
-              <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+              <Text style={{ fontFamily: "outfit" }}>Welocme,</Text>
+              <Text
+                style={{
+                  // fontWeight: "bold",
+                  fontSize: 20,
+                  fontFamily: "outfit-medium",
+                }}
+              >
                 {user?.fullName}
               </Text>
             </View>
