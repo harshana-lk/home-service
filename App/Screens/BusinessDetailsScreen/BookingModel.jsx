@@ -7,20 +7,44 @@ import {
   TextInput,
   ScrollView,
   KeyboardAvoidingView,
+  ToastAndroid,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import PageHeading from "../../Component/PageHeading";
 import CalendarPicker from "react-native-calendar-picker";
 import { Ionicons } from "@expo/vector-icons";
-import { now } from "moment";
+import moment, { now } from "moment";
 import { useNavigation } from "@react-navigation/native";
 import Heading from "../../Component/Heading";
+import GlobalApi from "../../Utils/GlobalApi";
+import { useUser } from "@clerk/clerk-expo";
 
-export default function BookingModel({ hideModel }) {
+export default function BookingModel({ businessId, hideModel }) {
   const [selectedTime, setSelectedTime] = useState();
   const [selectedDate, setSelectedDate] = useState([]);
   const [note, setNote] = useState();
   const [timeList, setTimeList] = useState([]);
+  const { user } = useUser();
+
+  const createNewBooking = () => {
+    if (!selectedTime || !selectedDate) {
+      ToastAndroid.show("Please Select Date and Time", ToastAndroid.LONG);
+      return;
+    }
+    const data = {
+      userName: user?.fullName,
+      userEmail: user?.primaryEmailAddress.emailAddress,
+      time: selectedTime,
+      date: moment(selectedDate).format("YYYY-MM-DD"),
+      note: note,
+      businessId: businessId,
+    };
+    GlobalApi.createBooking(data).then((resp) => {
+      console.log("resp", resp);
+      ToastAndroid.show("Booking Created Successfully", ToastAndroid.LONG);
+      hideModel();
+    });
+  };
 
   useEffect(() => {
     getTime();
@@ -126,7 +150,10 @@ export default function BookingModel({ hideModel }) {
           />
         </View>
 
-        <TouchableOpacity style={{ marginTop: 15 }}>
+        <TouchableOpacity
+          style={{ marginTop: 15 }}
+          onPress={() => createNewBooking()}
+        >
           <Text style={styles.confirmBtn}>Confirm & Book</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>

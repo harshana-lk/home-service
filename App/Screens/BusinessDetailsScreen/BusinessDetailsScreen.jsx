@@ -177,7 +177,10 @@ export default function BusinessDetailsScreen() {
           </TouchableOpacity>
         </View>
         <Modal animationType="fade" visible={showModel}>
-          <BookingModel hideModel={() => setShowModel(false)} />
+          <BookingModel
+            hideModel={() => setShowModel(false)}
+            businessId={business.id}
+          />
         </Modal>
       </View>
     )
