@@ -1,14 +1,23 @@
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  Modal,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import BookingModel from "./BookingModel";
 
 export default function BusinessDetailsScreen() {
   const navigation = useNavigation();
   const param = useRoute().params;
   const [isReadMore, setIsReadMore] = useState();
+  const [showModel, setShowModel] = useState(false);
   const [business, setBusiness] = useState(param.business);
   useEffect(() => {}, []);
   return (
@@ -151,7 +160,10 @@ export default function BusinessDetailsScreen() {
               Message
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.bookingBtn}>
+          <TouchableOpacity
+            style={styles.bookingBtn}
+            onPress={() => setShowModel(true)}
+          >
             <Text
               style={{
                 fontFamily: "outfit-medium",
@@ -164,6 +176,9 @@ export default function BusinessDetailsScreen() {
             </Text>
           </TouchableOpacity>
         </View>
+        <Modal animationType="fade" visible={showModel}>
+          <BookingModel hideModel={() => setShowModel(false)} />
+        </Modal>
       </View>
     )
   );

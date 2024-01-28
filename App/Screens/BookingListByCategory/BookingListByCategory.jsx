@@ -4,6 +4,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import GlobalApi from "../../Utils/GlobalApi";
 import BusinessLIstItem from "./BusinessLIstItem";
+import PageHeading from "../../Component/PageHeading";
 
 export default function BookingListByCategory() {
   const param = useRoute().params;
@@ -32,21 +33,7 @@ export default function BookingListByCategory() {
         height: "100%",
       }}
     >
-      <TouchableOpacity
-        onPress={() => navigation.goBack()}
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          gap: 15,
-          marginBottom: 30,
-        }}
-      >
-        <Ionicons name="chevron-back-circle-outline" size={32} color="black" />
-        <Text style={{ fontFamily: "outfit-medium", fontSize: 24 }}>
-          {param.category}
-        </Text>
-      </TouchableOpacity>
+      <PageHeading title={param.category} />
 
       {businessList.length > 0 ? (
         <FlatList
