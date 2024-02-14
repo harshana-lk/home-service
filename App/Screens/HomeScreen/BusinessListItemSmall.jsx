@@ -1,9 +1,17 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
 export default function BusinessListItemSmall({ business }) {
+  const navigation = useNavigation();
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => {
+        navigation.push("business-details", { business: business });
+      }}
+    >
       <Image source={{ uri: business?.images[0]?.url }} style={styles.image} />
       <View>
         <Text
@@ -30,7 +38,7 @@ export default function BusinessListItemSmall({ business }) {
           ⭐⭐⭐⭐⭐
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 

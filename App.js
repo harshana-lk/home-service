@@ -33,7 +33,7 @@ export default function App() {
 
   return (
     <ClerkProvider
-      tokenCache={tokenCache}
+      // tokenCache={tokenCache}
       publishableKey="pk_test_Z29vZC1tb25pdG9yLTIzLmNsZXJrLmFjY291bnRzLmRldiQ"
     >
       <View style={styles.container}>

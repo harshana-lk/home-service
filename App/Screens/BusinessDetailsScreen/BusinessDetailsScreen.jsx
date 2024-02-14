@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Modal,
+  Linking,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
@@ -149,7 +150,12 @@ export default function BusinessDetailsScreen() {
           </View>
         </View>
         <View style={styles.footer}>
-          <TouchableOpacity style={styles.messageBtn}>
+          <TouchableOpacity
+            style={styles.messageBtn}
+            onPress={() => {
+              Linking.openURL(`mailto:${business.email}`);
+            }}
+          >
             <Text
               style={{
                 fontFamily: "outfit-medium",
